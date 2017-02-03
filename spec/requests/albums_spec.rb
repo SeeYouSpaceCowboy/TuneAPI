@@ -56,6 +56,22 @@ describe "Albums API" do
     end
  end
 
-  it 'loads a single resources associated albums' do 
+ describe 'destroy /v1/albums/:id' do 
+  it 'destroys the albums record' do 
+    album =  Album.create(title: 'Purpose')
+    delete "/v1/albums/#{album.id}"
+    
+    expect(response).to be_success 
+
+    expect(Album.count).to eq(0)
   end
+ end
+
+ describe 'Resource not found' do 
+   it 'returns 404 when album is not found' do 
+      get "/v1/albums/9000" 
+
+      expect(response.status).to eq(404) 
+   end
+ end
 end
