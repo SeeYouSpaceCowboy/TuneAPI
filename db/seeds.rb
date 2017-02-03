@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# genres = ['Pop', 'Alternative', 'Indie', 'Hip-Hop', 'Disco', 'Country']
+
+10.times do
+  Artist.create(name: Faker::Name.first_name)
+end
+
+50.times do 
+  Album.create(title: Faker::Book.title, artist: Artist.all.sample, release_date: Date.today-rand(10000), genre: genres.sample)
+end
+
+100.times do 
+  Song.create(title: Faker::Hipster.word, album: Album.all.sample)
+end
